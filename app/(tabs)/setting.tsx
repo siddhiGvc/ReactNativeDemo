@@ -12,34 +12,55 @@ import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 import Slider from '@react-native-community/slider';
 
-import { useRouter ,Href} from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 
 
 export default function SettingScreen() {
   const [flexDirection, setflexDirection] = useState('column');
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
-  const [inputValue, setInputValue] = useState('');
+ 
+  const [selectedValue1, setSelectedValue1] = useState('-MONO'); 
+  const [selectedValue2, setSelectedValue2] = useState('1');
+  const [selectedValue3, setSelectedValue3] = useState('PAUSE');
+
+  const [inputValue1, setInputValue1] = useState('');
+  const [inputValue2, setInputValue2] = useState('');
+  const [inputValue3, setInputValue3] = useState('');
+  const [inputValue4, setInputValue4] = useState('');
+  const params = useLocalSearchParams();
+  
 
   return (
   
  
    <>
-   <View style={styles.row}>
-     <ThemedView style={styles1.stepContainer}>
-        <ThemedText style={styles1.heading} type="subtitle">SEQUENCE</ThemedText>
-    </ThemedView>
-   <View style={styles1.box}>
-    <SequenceLayout
-    label=''
-    values={['1', '2','3','4']}
-    selectedValue={flexDirection}
-    setSelectedValue={setflexDirection}>
- 
-  </SequenceLayout>
+  
+        <View style={styles.row}>
+      
+                <ThemedView style={styles1.stepContainer}>
+                    <ThemedText style={styles1.heading} type="subtitle">SEQUENCE</ThemedText>
+                </ThemedView>
+                <View style={styles1.box}>
+                <SequenceLayout
+                label=''
+                values2={['1', '2','3','4']}
+                selectedValue2={selectedValue2}
+                setSelectedValue2={setSelectedValue2}>
+            
+              </SequenceLayout>
 
-  </View>
-  </View>
+              </View>
+           
+            <ThemedView style={styles1.stepContainer}>
+                  <ThemedText style={styles1.heading} type="subtitle">{params.paramName}</ThemedText>
+              </ThemedView>
+            
+        
+        </View>
+       
+
+  
   <View style={styles.row}>
    <View style={styles.box}>
    <ThemedView style={styles.stepContainer}>
@@ -47,9 +68,9 @@ export default function SettingScreen() {
     </ThemedView>
     <PreviewLayout
     label=''
-    values={['-MONO', '+MONO','BI-PHASE']}
-    selectedValue={flexDirection}
-    setSelectedValue={setflexDirection}>
+    values1={['-MONO', '+MONO','BI-PHASE']}
+    selectedValue1={selectedValue1}
+    setSelectedValue1={setSelectedValue1}>
   
   </PreviewLayout>
   </View>
@@ -60,11 +81,11 @@ export default function SettingScreen() {
     <TextInput
        
         keyboardType="numeric"
-        value={inputValue}
-        onChangeText={text => setInputValue(text)} // Update the state as user types
+        value={inputValue1}
+        onChangeText={text => setInputValue1(text)} // Update the state as user types
         placeholder="Type here..."
       />
-   <Text >You entered: {inputValue} Hz</Text>
+   <Text >You entered: {inputValue1} Hz</Text>
   </View>
   </View>
   <View style={styles.row}>
@@ -96,11 +117,11 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue}
-       onChangeText={text => setInputValue(text)} // Update the state as user types
+       value={inputValue2}
+       onChangeText={text => setInputValue2(text)} // Update the state as user types
        placeholder="Type here..."
      />
-      <Text >You entered: {inputValue} Sec</Text>
+      <Text >You entered: {inputValue2} Sec</Text>
 
      </View>
      <View style={styles.row}>
@@ -108,11 +129,11 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue}
-       onChangeText={text => setInputValue(text)} // Update the state as user types
+       value={inputValue3}
+       onChangeText={text => setInputValue3(text)} // Update the state as user types
        placeholder="Type here..."
      />
-      <Text >You entered: {inputValue} Sec</Text>
+      <Text >You entered: {inputValue3} Sec</Text>
 
      </View>
   </View>
@@ -146,18 +167,18 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue}
-       onChangeText={text => setInputValue(text)} // Update the state as user types
+       value={inputValue4}
+       onChangeText={text => setInputValue4(text)} // Update the state as user types
        placeholder="Type here..."
      />
-      <Text >You entered: {inputValue} Sec</Text>
+      <Text >You entered: {inputValue4} Sec</Text>
 
      </View>
      <MachineButtons
     label=''
-    values={['START', 'PAUSE','STOP']}
-    selectedValue={flexDirection}
-    setSelectedValue={setflexDirection}>
+    values3={['START', 'PAUSE','STOP']}
+    selectedValue3={selectedValue3}
+    setSelectedValue3={setSelectedValue3}>
  
   </MachineButtons>
   </View>
@@ -171,17 +192,33 @@ export default function SettingScreen() {
 
 type PreviewLayoutProps = PropsWithChildren<{
   label: string;
-  values: string[];
-  selectedValue: string;
-  setSelectedValue: (value: string) => void;
+  values1: string[];
+  selectedValue1: string;
+  setSelectedValue1: (value: string) => void;
+  children?: React.ReactNode;
+}>;
+
+type SequenceLayoutProps = PropsWithChildren<{
+  label: string;
+  values2: string[];
+  selectedValue2: string;
+  setSelectedValue2: (value: string) => void;
+  children?: React.ReactNode;
+}>;
+
+type MachineButtonsProps = PropsWithChildren<{
+  label: string;
+  values3: string[];
+  selectedValue3: string;
+  setSelectedValue3: (value: string) => void;
   children?: React.ReactNode;
 }>;
 
 const PreviewLayout: React.FC<PreviewLayoutProps> = ({
   label,
-  values,
-  selectedValue,
-  setSelectedValue,
+  values1,
+  selectedValue1,
+  setSelectedValue1,
   children,
 }) => {
   const router = useRouter();
@@ -191,22 +228,22 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
       {/* <Text style={styles.label}>{label}</Text> */}
 
       <View style={styles.row}>
-        {values.map((value) => (
+        {values1.map((value) => (
           <TouchableOpacity
             key={value}
             onPress={() => {
-              setSelectedValue(value);
+              setSelectedValue1(value);
               // Navigate to '/programs' screen
             }}
             style={[
               styles.button,
-              selectedValue === value && styles.selected,
+              selectedValue1 === value && styles.selected,
             ]}
           >
             <Text
               style={[
                 styles.buttonLabel,
-                selectedValue === value && styles.selectedLabel,
+                selectedValue1 === value && styles.selectedLabel,
               ]}
             >
               {value}
@@ -220,11 +257,11 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
   );
 };
 
-const SequenceLayout: React.FC<PreviewLayoutProps> = ({
+const SequenceLayout: React.FC<SequenceLayoutProps> = ({
   label,
-  values,
-  selectedValue,
-  setSelectedValue,
+  values2,
+  selectedValue2,
+  setSelectedValue2,
   children,
 }) => {
   const router = useRouter();
@@ -237,22 +274,22 @@ const SequenceLayout: React.FC<PreviewLayoutProps> = ({
       {/* <Text style={styles1.label}>{label}</Text> */}
 
       <View style={styles1.row}>
-        {values.map((value) => (
+        {values2.map((value) => (
           <TouchableOpacity
             key={value}
             onPress={() => {
-              setSelectedValue(value);
+              setSelectedValue2(value);
               // Navigate to '/programs' screen
             }}
             style={[
               styles1.button,
-              selectedValue === value && styles1.selected,
+              selectedValue2 === value && styles1.selected,
             ]}
           >
             <Text
               style={[
                 styles1.buttonLabel,
-                selectedValue === value && styles1.selectedLabel,
+                selectedValue2 === value && styles1.selectedLabel,
               ]}
             >
               {value}
@@ -267,11 +304,11 @@ const SequenceLayout: React.FC<PreviewLayoutProps> = ({
 };
 
 
-const MachineButtons: React.FC<PreviewLayoutProps> = ({
+const MachineButtons: React.FC<MachineButtonsProps> = ({
   label,
-  values,
-  selectedValue,
-  setSelectedValue,
+  values3,
+  selectedValue3,
+  setSelectedValue3,
   children,
 }) => {
   const router = useRouter();
@@ -284,24 +321,24 @@ const MachineButtons: React.FC<PreviewLayoutProps> = ({
       {/* <Text style={styles1.label}>{label}</Text> */}
 
       <View style={styles2.row}>
-        {values.map((value) => (
+        {values3.map((value) => (
           <TouchableOpacity
             key={value}
             onPress={() => {
-              setSelectedValue(value);
+              setSelectedValue3(value);
               // Navigate to '/programs' screen
             }}
             style={[
               value==='START' && styles2.button1,
               value==='PAUSE' && styles2.button2,
               value==='STOP' && styles2.button3,
-              selectedValue === value && styles2.selected,
+              selectedValue3 === value && styles2.selected,
             ]}
           >
             <Text
               style={[
                 styles2.buttonLabel,
-                selectedValue === value && styles2.selectedLabel,
+                selectedValue3 === value && styles2.selectedLabel,
               ]}
             >
               {value}
@@ -323,6 +360,7 @@ const styles = StyleSheet.create({
     paddingVertical:2,
     paddingLeft:40,
     backgroundColor: 'white',
+    borderRadius: 10,
     justifyContent:'center',
     textAlign:'center',
     alignItems:'center'
@@ -410,6 +448,7 @@ const styles1 = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
+    borderRadius: 10,
     alignItems:'center'
   },
   box: {
@@ -417,7 +456,6 @@ const styles1 = StyleSheet.create({
     paddingVertical:-10,
     height: 50,
     flex:1,
-   
   
     borderRadius: 10,
     justifyContent:'center',
@@ -480,7 +518,8 @@ const styles1 = StyleSheet.create({
         position: 'absolute',
       },
       heading:{
-        fontSize: 18,
+        fontSize: 15,
+        marginLeft:4
       }
 });
 
@@ -493,6 +532,7 @@ const styles2 = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
+    borderRadius: 10,
     alignItems:'center'
   },
   box: {

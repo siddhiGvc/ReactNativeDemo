@@ -63,7 +63,7 @@ export default function ProgramsScreen() {
 
     <PreviewLayout
     label=''
-    values={['ANTERIOR DELTOID', 'QADRICEPS','POSTERIOR DELTOID','TIBALIS POSTERIOR','TRICEPS','GASTRONEMIUS & SOLEUS', 'BICEPS','HAMSTRINGS','ANTERIOR FOREARM','GLUTEUS','POSTERIOR FOREARM','ELECTOR SPINE']}
+    values={['ANTERIOR DELTOID', 'QADRICEPS','POSTERIOR DELTOID','TIBALIS POSTERIOR','TRICEPS','GASTRONEMIUS SOLEUS', 'BICEPS','HAMSTRINGS','ANTERIOR FOREARM','GLUTEUS','POSTERIOR FOREARM','ELECTOR SPINE']}
     selectedValue={flexDirection}
     setSelectedValue={setflexDirection}>
     {/* <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
@@ -120,7 +120,7 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
             key={value}
             onPress={() => {
               setSelectedValue(value);
-              router.push('./setting' as Href);
+              router.push(`./setting?paramName=${value}` as Href);
             }}
             style={[
               styles.button,
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
   box: {
     width: 50,
     height: 10,
+    
   },
   row: {
     flexDirection: 'row',
