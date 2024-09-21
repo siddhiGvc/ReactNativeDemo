@@ -10,10 +10,14 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      screenOptions={{
+     
+
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
+        // tabBarStyle: route.name === 'setting' ? { display: 'none' } : {},
+      })}
+      >
       <Tabs.Screen
         name="index"
         options={{
@@ -30,6 +34,26 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
+        }}
+      />
+       <Tabs.Screen
+        name="programs"
+        options={{
+          title: 'Program',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+          // tabBarStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
+        name="setting"
+        options={{
+          title: 'Setting',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+          // tabBarStyle: { display: 'none' },
         }}
       />
     </Tabs>

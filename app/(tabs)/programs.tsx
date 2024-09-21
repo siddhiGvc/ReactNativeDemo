@@ -14,7 +14,7 @@ import { Link } from 'expo-router';
 import { useRouter ,Href} from 'expo-router';
 
 
-export default function HomeScreen() {
+export default function ProgramsScreen() {
   const [flexDirection, setflexDirection] = useState('column');
   return (
     
@@ -63,7 +63,7 @@ export default function HomeScreen() {
 
     <PreviewLayout
     label=''
-    values={['MANUAL', 'PRE-PROGRAMME']}
+    values={['ANTERIOR DELTOID', 'QADRICEPS','POSTERIOR DELTOID','TIBALIS POSTERIOR','TRICEPS','GASTRONEMIUS & SOLEUS', 'BICEPS','HAMSTRINGS','ANTERIOR FOREARM','GLUTEUS','POSTERIOR FOREARM','ELECTOR SPINE']}
     selectedValue={flexDirection}
     setSelectedValue={setflexDirection}>
     {/* <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
@@ -120,7 +120,7 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
             key={value}
             onPress={() => {
               setSelectedValue(value);
-              router.push('./programs' as Href); // Navigate to '/programs' screen
+              router.push('./setting' as Href);
             }}
             style={[
               styles.button,
@@ -151,7 +151,8 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 8,
+    marginTop: 3,
+    paddingLeft:40,
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
@@ -159,21 +160,21 @@ const styles = StyleSheet.create({
   },
   box: {
     width: 50,
-    height: 50,
+    height: 10,
   },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   button: {
-    paddingHorizontal:-10,
-    paddingVertical: 60,
+    paddingHorizontal:0,
+    paddingVertical: 8,
     borderRadius: 10,
-    backgroundColor: '#000080',
+    backgroundColor: '#D3D3D3',
     alignSelf: 'center',
     marginHorizontal: '1%',
     marginBottom: 6,
-    minWidth: '38%',
+    minWidth: '45%',
     textAlign: 'center',
     justifyContent:'center'
     
@@ -184,9 +185,9 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   buttonLabel: {
-    fontSize: 22,
-    fontWeight: '500',
-    color: 'white',
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#000080',
     textAlign:'center'
   },
   selectedLabel: {
@@ -195,6 +196,6 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     marginBottom: 10,
-    fontSize: 24,
+    fontSize: 14,
   },
 });
