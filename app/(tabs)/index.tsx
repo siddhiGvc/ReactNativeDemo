@@ -1,7 +1,7 @@
 // import { Image, StyleSheet, Platform } from 'react-native';
 // import {View} from 'react-native';
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View,Dimensions} from 'react-native';
 import type {PropsWithChildren} from 'react';
 
 
@@ -12,6 +12,9 @@ import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 
 import { useRouter ,Href} from 'expo-router';
+
+const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
 
 
 export default function HomeScreen() {
@@ -66,9 +69,7 @@ export default function HomeScreen() {
     values={['MANUAL', 'PRE-PROGRAMME']}
     selectedValue={flexDirection}
     setSelectedValue={setflexDirection}>
-    {/* <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-    <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-    <View style={[styles.box, {backgroundColor: 'steelblue'}]} /> */}
+    
   </PreviewLayout>
   
   );
@@ -150,12 +151,13 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
 
 const styles = StyleSheet.create({
   container: {
+    width:windowWidth,
+    height:windowHeight,
     flex: 1,
-    marginTop: 8,
     backgroundColor: 'white',
-    justifyContent:'center',
+    justifyContent:'flex-start',
     textAlign:'center',
-    alignItems:'center'
+    alignItems:'center',
   },
   box: {
     width: 50,

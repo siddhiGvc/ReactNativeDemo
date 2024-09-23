@@ -20,9 +20,9 @@ export default function SettingScreen() {
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
  
-  const [selectedValue1, setSelectedValue1] = useState('-MONO'); 
+  const [selectedValue1, setSelectedValue1] = useState(''); 
   const [selectedValue2, setSelectedValue2] = useState('1');
-  const [selectedValue3, setSelectedValue3] = useState('PAUSE');
+  const [selectedValue3, setSelectedValue3] = useState('');
 
   const [inputValue1, setInputValue1] = useState('');
   const [inputValue2, setInputValue2] = useState('');

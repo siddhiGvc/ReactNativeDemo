@@ -74,6 +74,9 @@ const dots= [
 
 
   // Second set of dots for the second image
+
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
  
 
 const InfoScreen = () => {
@@ -83,8 +86,7 @@ const InfoScreen = () => {
 
   const [selectedDot,setSelectedDot]=useState(0);
 
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
+  
  
 
   
@@ -129,10 +131,15 @@ const InfoScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    width:windowWidth,
+    height:350,
     flex: 1,
+    marginTop: 3,
     flexDirection: 'row', // Align children horizontally
     justifyContent:'space-between', // Adjust space between images
-    alignItems: 'center', // Center vertically in landscape mode
+    textAlign:'center',
+    alignItems: 'center', 
+    
   },
   image: {
     width: Dimensions.get('window').width / 2, // Divide screen width between the two images
