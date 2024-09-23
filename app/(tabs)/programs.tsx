@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   },
   selectedLabel: {
     color: 'white',
+    fontWeight:'400'
   },
   label: {
     textAlign: 'center',
