@@ -89,12 +89,12 @@ export default function SettingScreen() {
   </View>
   </View>
   <View style={styles.row}>
-  <View style={[styles.box]}>
+  <View style={styles.box}>
     <ThemedView style={styles.stepContainer}>
     <ThemedText style={styles.heading} type="subtitle">DUTY CYCLE</ThemedText>
     </ThemedView>
     <Slider
-        style={{ width: 350, height: 40 }}
+        style={styles.slider}
         minimumValue={0}
         maximumValue={100}
         step={1}
@@ -108,7 +108,7 @@ export default function SettingScreen() {
     <ThemedText style={styles.heading} type="subtitle">{value1}</ThemedText>
     </ThemedView>
   </View>
-  <View style={[styles.box]}>
+  <View style={styles.box}>
     <ThemedView style={styles.stepContainer}>
     <ThemedText style={styles.heading} type="subtitle">PULSE WIDTH</ThemedText>
     </ThemedView>
@@ -144,7 +144,7 @@ export default function SettingScreen() {
     <ThemedText style={styles.heading} type="subtitle">INTENSITY</ThemedText>
     </ThemedView>
     <Slider
-        style={{ width: 350, height: 40 }}
+        style={styles.slider}
         minimumValue={0}
         maximumValue={100}
         step={1}
@@ -365,11 +365,19 @@ const styles = StyleSheet.create({
     textAlign:'center',
     alignItems:'center'
   },
+  slider:{
+    flex:1,
+    width: 330,
+    height: 40,
+    justifyContent:'center',
+    alignContent:'center'
+  },
   box: {
     maxWidth:360,
     width: 350,
     height: 87,
     flex:1,
+    padding:1,
     borderWidth: 2, // Thickness of the border
     borderColor: '#D3D3D3', // Border color
     borderRadius: 10,
@@ -600,8 +608,8 @@ const styles2 = StyleSheet.create({
     textAlign:'center'
   },
   buttonLabel: {
-    fontSize: 14,
-    fontWeight: '400',
+    fontSize: 11,
+    fontWeight: '500',
     color: 'white',
     textAlign:'center'
   },
@@ -611,7 +619,7 @@ const styles2 = StyleSheet.create({
   label: {
     textAlign: 'center',
     marginBottom: 10,
-    fontSize: 14,
+    fontSize: 13,
   },
   titleContainer: {
         flexDirection: 'row',
