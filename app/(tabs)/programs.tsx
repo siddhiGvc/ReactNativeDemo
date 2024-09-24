@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -115,11 +115,13 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
       <Text style={styles.label}>{label}</Text>
 
       <View style={styles.row}>
-        {values.map((value) => (
+        {values.map((value,i) => (
           <TouchableOpacity
             key={value}
-            onPress={() => {
+            onPress={async() => {
               setSelectedValue(value);
+              await AsyncStorage.setItem("SelectedProgram", i.toString());
+              // localStorage.setItem("SelectedProgram",i);
               router.push(`./setting?paramName=${value}` as Href);
             }}
             style={[

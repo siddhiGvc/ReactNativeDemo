@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 const CustomHeader = () => (
-  <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
+  <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }} >
     <Image
       source={require('../../assets/images/GVC.png')} // Replace with your logo path
       style={{ width: 150, height: 50, marginLeft: 10,marginTop:5 }}

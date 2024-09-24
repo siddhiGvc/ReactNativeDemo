@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { View,Image, ImageBackground, TouchableOpacity, StyleSheet, Dimensions,ImageSourcePropType } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dots= [
     { id: 1, x: '9.3%', y: '23.2%' },
@@ -78,14 +78,90 @@ const dots= [
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
  
-
+// var storedProgram = AsyncStorage.getItem('SelectedProgram');
 const InfoScreen = () => {
   // First set of dots for the first image
 
   const Images: ImageKeys[] = ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'image11', 'image12', 'image13', 'image14', 'image15', 'image16', 'image17', 'image18', 'image19', 'image20', 'image21', 'image22', 'image23', 'image24'];
 
   const [selectedDot,setSelectedDot]=useState(0);
+  const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
 
+  const fetchSelectedProgram = async () => {
+    try {
+      var storedProgram = await AsyncStorage.getItem('SelectedProgram');
+      if (storedProgram !== null) {
+        setSelectedProgram(storedProgram); // Now you have the stored value
+        const program=parseInt(storedProgram);
+        if(program==0)
+        {
+          setSelectedDot(1);
+        }
+        else if(program==1)
+        {
+          setSelectedDot(7);
+        }
+        else if(program==2)
+        {
+          setSelectedDot(11);
+        }
+        else if(program==3)
+        {
+          setSelectedDot(9);
+        }
+        else if(program==4)
+        {
+          setSelectedDot(13);
+        }
+        else if(program==5)
+        {
+          setSelectedDot(22);
+        }
+        else if(program==6)
+        {
+          setSelectedDot(3);
+        }
+        else if(program==7)
+        {
+          setSelectedDot(20);
+        }
+        else if(program==8)
+        {
+          setSelectedDot(5);
+        }
+        else if(program==9)
+        {
+          setSelectedDot(17);
+        }
+        else if(program==10)
+        {
+          setSelectedDot(15);
+        }
+        else if(program==11)
+        {
+          setSelectedDot(16);
+        }
+        else {
+          setSelectedDot(0);
+        }
+        
+      }
+    } catch (error) {
+      console.error('Error fetching selected program:', error);
+    }
+  };
+
+
+  useEffect(() => {
+   
+   
+    fetchSelectedProgram();
+    const interval=setInterval(()=>{
+    fetchSelectedProgram();
+    },4000)
+
+    return ()=>clearInterval(interval);
+  }, []);
   
  
 
@@ -111,7 +187,7 @@ const InfoScreen = () => {
         {dots.map((dot) => (
         <TouchableOpacity
           key={dot.id}
-          onPress={() => setSelectedDot(dot.id)}
+          onPress={async() => {setSelectedDot(dot.id); await AsyncStorage.removeItem("SelectedProgram");}}
           style={[
             styles.dot,
             {
