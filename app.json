@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "BIOMED",
-    "slug": "BIOMED",
+    "slug": "MyHMIApp",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/images/gvcAppIcon.png",

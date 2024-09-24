@@ -131,7 +131,7 @@ const InfoScreen = () => {
         }
         else if(program==9)
         {
-          setSelectedDot(17);
+          setSelectedDot(18);
         }
         else if(program==10)
         {
