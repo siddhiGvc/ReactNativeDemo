@@ -751,7 +751,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical:2,
-    paddingLeft:40,
     backgroundColor: 'white',
     borderRadius: 10,
     justifyContent:'center',
@@ -935,12 +934,12 @@ const styles2 = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:3,
-    paddingLeft:40,
+  
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
     borderRadius: 10,
-    alignItems:'flex-start'
+    alignItems:'center'
   },
   box: {
     maxWidth:160,
