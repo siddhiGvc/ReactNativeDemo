@@ -6,7 +6,7 @@ const dots= [
     { id: 1, x: '9.3%', y: '23.2%' },
     { id: 2, x: '17.8%', y: '23.3%' },
     { id: 3, x: '8.7%', y: '32.6%' },
-    { id: 4, x: '18.2%', y: '33%' },
+    { id: 4, x: '18.2%', y: '32.7%' },
     { id: 5, x: '8.3%', y: '40.7%' },
     { id: 6, x: '18.3%', y: '40.7%' },
     { id: 7, x: '11.3%', y: '55.7%' },
@@ -180,7 +180,7 @@ const InfoScreen = () => {
       />
 
       <ImageBackground
-        source={require('../../assets/images/BodyImages/Body.png')} // Second image
+        source={require('../../assets/images/BodyImages/Body2.png')} // Second image
         resizeMode="contain"
         style={styles.image}
       >
@@ -189,7 +189,8 @@ const InfoScreen = () => {
           key={dot.id}
           onPress={async() => {setSelectedDot(dot.id); await AsyncStorage.removeItem("SelectedProgram");}}
           style={[
-            styles.dot,
+            styles.dotContainer,
+           
             {
               left: calculatePosition(dot.x, windowWidth),
               top: calculatePosition(dot.y, windowHeight),
@@ -198,7 +199,9 @@ const InfoScreen = () => {
                 top: calculatePosition(dot.y, windowHeight),}
           ]}
           
-        />
+        >
+          
+          </TouchableOpacity>
       ))}
       </ImageBackground>
     </View>
@@ -206,6 +209,13 @@ const InfoScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  dotContainer: {
+    position: 'absolute',
+    width: 40,  // Larger clickable area
+    height: 40,  // Larger clickable area
+    justifyContent: 'center',  // Center the dot inside the container
+    alignItems: 'center',  // Center the dot inside the container
+  },
   container: {
     width:windowWidth,
     height:350,
@@ -227,6 +237,7 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 10,
     backgroundColor: '#000080',
+    
   },
   selectedDot: {
     position: 'absolute',
