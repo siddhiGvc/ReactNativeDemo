@@ -1,12 +1,16 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { View, Text, Image } from 'react-native';
+import React,{useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View,Dimensions,Image} from 'react-native';
+import type {PropsWithChildren} from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+
+const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
 
 
 const CustomHeader = () => (
@@ -19,8 +23,24 @@ const CustomHeader = () => (
   </View>
 );
 
+const MenuHeader = (key:any,value:any) => (
+ 
+  <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }} >
+     <PreviewLayout
+    label=''
+    values={['MANUAL', 'PRE-PROGRAMME']}
+    selectedValue={value}
+    setSelectedValue={key}
+    >
+    
+  </PreviewLayout>
+  </View>
+  
+);
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [flexDirection, setflexDirection] = useState('column');
 
   return (
     <Tabs
@@ -43,19 +63,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="info"
-        options={{
-          title: 'Info',
-          tabBarIcon: ({ color, focused }) => (
-            focused ? (
-              <FontAwesome name="info-circle" size={24} color={color} />
-            ) : (
-              <MaterialIcons name="info-outline" size={24} color={color} />
-            )
-          )
-        }}
-      />
+     
        <Tabs.Screen
         name="programs"
         options={{
@@ -84,6 +92,126 @@ export default function TabLayout() {
           // tabBarStyle: { display: 'none' },
         }}
       />
+       <Tabs.Screen
+        name="info"
+        options={{
+          title: 'Info',
+          tabBarIcon: ({ color, focused }) => (
+            focused ? (
+              <FontAwesome name="info-circle" size={24} color={color} />
+            ) : (
+              <MaterialIcons name="info-outline" size={24} color={color} />
+            )
+          )
+        }}
+      />
     </Tabs>
   );
 }
+
+
+
+type PreviewLayoutProps = PropsWithChildren<{
+  label: string;
+  values: string[];
+  selectedValue: string;
+  setSelectedValue: (value: string) => void;
+  children?: React.ReactNode;
+}>;
+
+const PreviewLayout: React.FC<PreviewLayoutProps> = ({
+  label,
+  values,
+  selectedValue,
+  setSelectedValue,
+  children,
+}) => {
+  
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>{label}</Text>
+
+      <View style={styles.row}>
+        {values.map((value) => (
+          <TouchableOpacity
+            key={value}
+            onPress={() => {
+              setSelectedValue(value);
+              
+            }}
+            style={[
+              styles.button,
+              selectedValue === value && styles.selected,
+            ]}
+          >
+            <Text
+              style={[
+                styles.buttonLabel,
+                selectedValue === value && styles.selectedLabel,
+              ]}
+            >
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* <View style={styles.contentContainer}>
+        {children}
+      </View> */}
+    </View>
+  );
+};
+
+
+
+const styles = StyleSheet.create({
+  container: {
+   
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent:'flex-start',
+    textAlign:'center',
+    alignItems:'center',
+  },
+  box: {
+    width: 50,
+    height: 50,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    
+  },
+  button: {
+    paddingHorizontal:-10,
+    paddingVertical: 10,
+    backgroundColor: '#D3D3D3',
+    alignSelf: 'center',
+    marginBottom: 6,
+    minWidth: '15%',
+    textAlign: 'center',
+    justifyContent:'center'
+    
+  },
+  selected: {
+    backgroundColor: '#000080',
+    borderWidth: 0,
+    textAlign:'center'
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#000080',
+    textAlign:'center'
+  },
+  selectedLabel: {
+    color: 'white',
+  },
+  label: {
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 14,
+  },
+});

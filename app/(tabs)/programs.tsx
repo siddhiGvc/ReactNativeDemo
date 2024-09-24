@@ -1,6 +1,6 @@
 // import { Image, StyleSheet, Platform } from 'react-native';
 // import {View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,84 +16,65 @@ import { useRouter ,Href} from 'expo-router';
 
 export default function ProgramsScreen() {
   const [flexDirection, setflexDirection] = useState('column');
-  return (
-    
- 
-    //<ParallaxScrollView
-    //   headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-    //   headerImage={
-    //     <Image
-    //       source={require('@/assets/images/partial-react-logo.png')}
-    //       style={styles.reactLogo}
-    //     />
-    //   }>
-        
-    //    <ThemedView style={styles.titleContainer}>
-    //     <ThemedText type="title">Welcome Siddhi!</ThemedText>
-    //     <HelloWave />
-    //   </ThemedView>
-    //   <ThemedView style={styles.stepContainer}>
-    //     <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-    //     <ThemedText>
-    //       Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-    //       Press{' '}
-    //       <ThemedText type="defaultSemiBold">
-    //         {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-    //       </ThemedText>{' '}
-    //       to open developer tools.
-    //     </ThemedText>
-    //   </ThemedView>
-    //   <ThemedView style={styles.stepContainer}>
-    //     <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-    //     <ThemedText>
-    //       Tap the Explore tab to learn more about what's included in this starter app.
-    //     </ThemedText>
-    //   </ThemedView>
-    //   <ThemedView style={styles.stepContainer}>
-    //     <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-    //     <ThemedText>
-    //       When you're ready, run{' '}
-    //       <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-    //       <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-    //       <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-    //       <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-    //     </ThemedText>
-    //   </ThemedView> 
-    // </ParallaxScrollView>
+  const [selected, setSelected] = useState('MANUAL');
 
+
+  const fetchSelectedMenu = async () => {
+    try {
+      var storedMenu= await AsyncStorage.getItem('SelectedMenu');
+      if (storedMenu !== null) {
+       
+        setSelected(storedMenu);
+      }
+    } catch (error) {
+      console.error('Error fetching selected program:', error);
+    }
+  };
+
+
+  useEffect(() => {
+   
+   
+    fetchSelectedMenu();
+    const interval=setInterval(()=>{
+    fetchSelectedMenu();
+    },1000)
+
+    return ()=>clearInterval(interval);
+  }, []);
+ 
+  return (
+   
+<>
+   <MenuLayout
+    label=''
+    values={['MANUAL', 'PRE-PROGRAMME']}
+    selectedValue={selected}
+    setSelectedValue={setSelected}>
+    
+  </MenuLayout>
     <PreviewLayout
     label=''
     values={['ANTERIOR DELTOID', 'QADRICEPS','POSTERIOR DELTOID','TIBALIS POSTERIOR','TRICEPS','GASTRONEMIUS SOLEUS', 'BICEPS','HAMSTRINGS','ANTERIOR FOREARM','GLUTEUS','POSTERIOR FOREARM','ELECTOR SPINE']}
     selectedValue={flexDirection}
     setSelectedValue={setflexDirection}>
-    {/* <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-    <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-    <View style={[styles.box, {backgroundColor: 'steelblue'}]} /> */}
+  
   </PreviewLayout>
+  </>
   
   );
 }
 
-// const styles = StyleSheet.create({
-//   titleContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     gap: 8,
-//   },
-//   stepContainer: {
-//     gap: 8,
-//     marginBottom: 8,
-//   },
-//   reactLogo: {
-//     height: 178,
-//     width: 290,
-//     bottom: 0,
-//     left: 0,
-//     position: 'absolute',
-//   },
-// });
 
 type PreviewLayoutProps = PropsWithChildren<{
+  label: string;
+  values: string[];
+  selectedValue: string;
+  setSelectedValue: (value: string) => void;
+  children?: React.ReactNode;
+}>;
+
+type MenuLayoutProps = PropsWithChildren<{
   label: string;
   values: string[];
   selectedValue: string;
@@ -149,14 +130,56 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
 };
 
 
+const MenuLayout: React.FC<MenuLayoutProps> = ({
+  label,
+  values,
+  selectedValue,
+  setSelectedValue,
+  children,
+}) => {
+
+
+  return (
+    <View style={styles1.container}>
+      <Text style={styles1.label}>{label}</Text>
+
+      <View style={styles1.row}>
+        {values.map((value,i) => (
+          <TouchableOpacity
+            key={value}
+          
+            style={[
+              styles1.button,
+              selectedValue === value && styles1.selected,
+            ]}
+          >
+            <Text
+              style={[
+                styles1.buttonLabel,
+                selectedValue === value && styles1.selectedLabel,
+              ]}
+            >
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* <View style={styles.contentContainer}>
+        {children}
+      </View> */}
+    </View>
+  );
+};
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 3,
     paddingLeft:40,
     backgroundColor: 'white',
-    justifyContent:'center',
+    justifyContent:'flex-end',
     textAlign:'center',
     alignItems:'center'
   },
@@ -201,5 +224,58 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
     fontSize: 14,
+    fontWeight:'400'
+  }
+});
+
+const styles1 = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingLeft:40,
+    backgroundColor: 'white',
+    justifyContent:'flex-start',
+    textAlign:'center',
+    alignItems:'flex-start'
   },
+  box: {
+    width: 50,
+    height: 10,
+    
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  button: {
+    paddingHorizontal:0,
+    paddingVertical: 9,
+    borderRadius: 10,
+    backgroundColor: '#D3D3D3',
+    alignSelf: 'center',
+    minWidth: '18%',
+    textAlign: 'center',
+    justifyContent:'flex-start'
+    
+  },
+  selected: {
+    backgroundColor: '#000080',
+    borderWidth: 0,
+    textAlign:'center'
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#000080',
+    textAlign:'center'
+  },
+  selectedLabel: {
+    color: 'white',
+    fontWeight:'500'
+  },
+  label: {
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 1,
+    fontWeight:'500'
+  }
 });

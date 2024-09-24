@@ -158,7 +158,7 @@ const InfoScreen = () => {
     fetchSelectedProgram();
     const interval=setInterval(()=>{
     fetchSelectedProgram();
-    },4000)
+    },2000)
 
     return ()=>clearInterval(interval);
   }, []);

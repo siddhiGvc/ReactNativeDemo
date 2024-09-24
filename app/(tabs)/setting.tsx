@@ -1,9 +1,9 @@
 // import { Image, StyleSheet, Platform } from 'react-native';
 // import {View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {StyleSheet, Text,TextInput, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -17,6 +17,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 
 export default function SettingScreen() {
   const [flexDirection, setflexDirection] = useState('column');
+  
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
  
@@ -29,6 +30,35 @@ export default function SettingScreen() {
   const [inputValue3, setInputValue3] = useState('');
   const [inputValue4, setInputValue4] = useState('');
   const params = useLocalSearchParams();
+
+  const [selected, setSelected] = useState('MANUAL');
+
+
+  const fetchSelectedMenu = async () => {
+    try {
+      var storedMenu= await AsyncStorage.getItem('SelectedMenu');
+      if (storedMenu !== null) {
+       
+        setSelected(storedMenu);
+      }
+    } catch (error) {
+      console.error('Error fetching selected program:', error);
+    }
+  };
+
+
+  useEffect(() => {
+   
+   
+    fetchSelectedMenu();
+    const interval=setInterval(()=>{
+    fetchSelectedMenu();
+    },1000)
+
+    return ()=>clearInterval(interval);
+  }, []);
+
+
   
 
   return (
@@ -37,9 +67,16 @@ export default function SettingScreen() {
    <>
   
         <View style={styles.row}>
-      
+                <MenuLayout
+                label=''
+                values={['MANUAL', 'PRE-PROGRAMME']}
+                selectedValue={selected}
+                setSelectedValue={setSelected}>
+                
+              </MenuLayout>
+              
                 <ThemedView style={styles1.stepContainer}>
-                    <ThemedText style={styles1.heading} type="subtitle">SEQUENCE</ThemedText>
+                    <ThemedText style={styles.heading} type="subtitle">SEQUENCE</ThemedText>
                 </ThemedView>
                 <View style={styles1.box}>
                 <SequenceLayout
@@ -51,11 +88,11 @@ export default function SettingScreen() {
               </SequenceLayout>
 
               </View>
-           
-            <ThemedView style={styles1.stepContainer}>
+              <ThemedView style={styles1.stepContainer}>
                   <ThemedText style={styles1.heading} type="subtitle">{params.paramName}</ThemedText>
               </ThemedView>
             
+          
         
         </View>
        
@@ -214,6 +251,15 @@ type MachineButtonsProps = PropsWithChildren<{
   children?: React.ReactNode;
 }>;
 
+type MenuLayoutProps = PropsWithChildren<{
+  label: string;
+  values: string[];
+  selectedValue: string;
+  setSelectedValue: (value: string) => void;
+  children?: React.ReactNode;
+}>;
+
+
 const PreviewLayout: React.FC<PreviewLayoutProps> = ({
   label,
   values1,
@@ -352,6 +398,48 @@ const MachineButtons: React.FC<MachineButtonsProps> = ({
   );
 };
 
+const MenuLayout: React.FC<MenuLayoutProps> = ({
+  label,
+  values,
+  selectedValue,
+  setSelectedValue,
+  children,
+}) => {
+
+
+  return (
+    <View style={styles3.container}>
+      <Text style={styles3.label}>{label}</Text>
+
+      <View style={styles3.row}>
+        {values.map((value,i) => (
+          <TouchableOpacity
+            key={value}
+          
+            style={[
+              styles3.button,
+              selectedValue === value && styles3.selected,
+            ]}
+          >
+            <Text
+              style={[
+                styles3.buttonLabel,
+                selectedValue === value && styles3.selectedLabel,
+              ]}
+            >
+              {value}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* <View style={styles.contentContainer}>
+        {children}
+      </View> */}
+    </View>
+  );
+};
+
 
 
 const styles = StyleSheet.create({
@@ -389,6 +477,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    backgroundColor:'white',
+    textAlign:'center'
+    
   },
   button: {
 
@@ -452,7 +543,7 @@ const styles1 = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:3,
-    paddingLeft:40,
+    paddingLeft:10,
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
@@ -476,14 +567,14 @@ const styles1 = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-  
+    paddingHorizontal:1,
     paddingVertical: 5,
     borderRadius: 10,
     backgroundColor: '#D3D3D3',
     alignSelf: 'center',
-    marginHorizontal: '1%',
+ 
     marginBottom: 6,
-    minWidth: '23%',
+    minWidth: '25%',
     textAlign: 'center',
     justifyContent:'center',
    
@@ -511,12 +602,13 @@ const styles1 = StyleSheet.create({
   titleContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 8,
+        
       },
       stepContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent:'flex-start',
+       
       },
       reactLogo: {
         height: 178,
@@ -526,8 +618,8 @@ const styles1 = StyleSheet.create({
         position: 'absolute',
       },
       heading:{
-        fontSize: 15,
-        marginLeft:4
+        fontSize: 18,
+        color:'#000080'
       }
 });
 
@@ -536,12 +628,12 @@ const styles2 = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:3,
-    paddingLeft:40,
+    paddingLeft:10,
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',
     borderRadius: 10,
-    alignItems:'center'
+    alignItems:'flex-start'
   },
   box: {
     maxWidth:160,
@@ -641,4 +733,57 @@ const styles2 = StyleSheet.create({
       heading:{
         fontSize: 18,
       }
+});
+
+
+const styles3 = StyleSheet.create({
+  container: {
+    width:250,
+   
+    backgroundColor: 'white',
+    justifyContent:'flex-start',
+    textAlign:'center',
+    alignItems:'center'
+  },
+  box: {
+    width: 50,
+    height: 10,
+    
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  button: {
+    paddingHorizontal:0,
+    paddingVertical: 9,
+    borderRadius: 10,
+    backgroundColor: '#D3D3D3',
+    alignSelf: 'center',
+    minWidth: '45%',
+    textAlign: 'center',
+    justifyContent:'flex-start'
+    
+  },
+  selected: {
+    backgroundColor: '#000080',
+    borderWidth: 0,
+    textAlign:'center'
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#000080',
+    textAlign:'center'
+  },
+  selectedLabel: {
+    color: 'white',
+    fontWeight:'500'
+  },
+  label: {
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 1,
+    fontWeight:'500'
+  }
 });

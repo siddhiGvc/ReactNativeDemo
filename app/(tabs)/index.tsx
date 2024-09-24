@@ -12,13 +12,14 @@ import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 
 import { useRouter ,Href} from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
 
 export default function HomeScreen() {
-  const [flexDirection, setflexDirection] = useState('column');
+  const [flexDirection, setflexDirection] = useState('MANUAL');
   return (
     
  
@@ -119,8 +120,9 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
         {values.map((value) => (
           <TouchableOpacity
             key={value}
-            onPress={() => {
+            onPress={async() => {
               setSelectedValue(value);
+              await AsyncStorage.setItem("SelectedMenu",value);
               router.push('./programs' as Href); // Navigate to '/programs' screen
             }}
             style={[
@@ -171,9 +173,9 @@ const styles = StyleSheet.create({
     paddingHorizontal:-10,
     paddingVertical: 60,
     borderRadius: 10,
-    backgroundColor: '#000080',
+    backgroundColor: '#D3D3D3',
     alignSelf: 'center',
-    marginHorizontal: '1%',
+    marginHorizontal: '2%',
     marginBottom: 6,
     minWidth: '38%',
     textAlign: 'center',
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   buttonLabel: {
     fontSize: 22,
     fontWeight: '500',
-    color: 'white',
+    color: '#000080',
     textAlign:'center'
   },
   selectedLabel: {
