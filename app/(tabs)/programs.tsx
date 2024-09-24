@@ -48,7 +48,7 @@ export default function ProgramsScreen() {
 <>
    <MenuLayout
     label=''
-    values={['MANUAL', 'PRE-PROGRAMME']}
+    values={['MANUAL', 'PRE-PROGRAM']}
     selectedValue={selected}
     setSelectedValue={setSelected}>
     
@@ -103,7 +103,7 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
               setSelectedValue(value);
               await AsyncStorage.setItem("SelectedProgram", i.toString());
               // localStorage.setItem("SelectedProgram",i);
-              router.push(`./setting?paramName=${value}` as Href);
+              router.push(`./setting?paramName=${value}&id=${i+1}` as Href);
             }}
             style={[
               styles.button,

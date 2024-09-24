@@ -8,27 +8,36 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter ,Href} from 'expo-router';
 
 const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
+  
 
-const CustomHeader = () => (
+const CustomHeader = () => {
+  const router = useRouter();
+
+  return <>
   <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }} >
     <Image
       source={require('../../assets/images/GVC.png')} // Replace with your logo path
       style={{ width: 150, height: 50, marginLeft: 10,marginTop:5 }}
+      onProgress={()=>{
+        router.push(`./index` as Href);
+      }}
     />
     <Text style={{ fontSize: 20, color: 'white', marginLeft: 10 }}>My App</Text>
   </View>
-);
+  </>
+}
 
 const MenuHeader = (key:any,value:any) => (
  
   <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }} >
      <PreviewLayout
     label=''
-    values={['MANUAL', 'PRE-PROGRAMME']}
+    values={['MANUAL', 'PRE-PROGRAM']}
     selectedValue={value}
     setSelectedValue={key}
     >

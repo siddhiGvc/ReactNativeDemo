@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "MyHMIApp",
-    "slug": "MyHMIApp",
+    "name": "BIOMED",
+    "slug": "BIOMED",
     "version": "1.0.0",
     "orientation": "landscape",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/gvcAppIcon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/images/gvcAppIcon.png",
+      "resizeMode": "native",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/gvcIcon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.siddhigvc.MyHMIApp"

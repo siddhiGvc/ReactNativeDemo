@@ -25,10 +25,10 @@ export default function SettingScreen() {
   const [selectedValue2, setSelectedValue2] = useState('1');
   const [selectedValue3, setSelectedValue3] = useState('');
 
-  const [inputValue1, setInputValue1] = useState('');
-  const [inputValue2, setInputValue2] = useState('');
-  const [inputValue3, setInputValue3] = useState('');
-  const [inputValue4, setInputValue4] = useState('');
+  const [inputValue1, setInputValue1] = useState<number | null>(null);
+  const [inputValue2, setInputValue2] = useState<number | null>(null);
+  const [inputValue3, setInputValue3] = useState<number | null>(null);
+  const [inputValue4, setInputValue4] = useState<number | null>(null);
   const params = useLocalSearchParams();
 
   const [selected, setSelected] = useState('MANUAL');
@@ -41,6 +41,309 @@ export default function SettingScreen() {
        
         setSelected(storedMenu);
       }
+      
+      var SO=params.id;
+    if(storedMenu == "PRE-PROGRAM")
+    {
+      if(selectedValue2=='1')
+      {
+        if(SO=='1')
+          {
+            setValue1(10);
+            setValue2(10);
+            setInputValue1(30);
+            setInputValue2(7);
+            setInputValue3(10);
+            setInputValue4(15);
+           //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+            
+          }
+          else if(SO=='2')
+          {
+            setValue1( 11);
+            setValue2( 11);
+            setInputValue1(35);
+            setInputValue2(4);
+            setInputValue3(8);
+            setInputValue4(15);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+              
+          }
+          else if(SO=='3')
+          {
+            setValue1( 12);
+            setValue2( 12);
+            setInputValue1(25);
+            setInputValue2(5);
+            setInputValue3(8);
+            setInputValue4(15);
+           //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='4')
+          {
+            setValue1( 13);
+            setValue2( 13);
+            setInputValue1(20);
+            setInputValue2(8);
+            setInputValue3(15);
+            setInputValue4(15);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='5')
+          {
+            setValue1( 14);
+            setValue2( 14);
+            setInputValue1(35);
+            setInputValue2(9);
+            setInputValue3(12);
+            setInputValue4(15);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='6')
+          {
+            setValue1( 15);
+            setValue2( 15);
+            setInputValue1(30);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(15);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='7')
+          {
+            setValue1( 16);
+            setValue2( 16);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+        //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='8')
+          {
+            setValue1( 17);
+            setValue2( 17);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='9')
+          {
+            setValue1( 18);
+            setValue2( 18);
+            setInputValue1(30);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='10')
+          {
+            setValue1( 19);
+            setValue2( 19);
+            setInputValue1(25);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='11')
+          {
+            setValue1( 20);
+            setValue2( 20);
+            setInputValue1(35);
+            setInputValue2(10);
+            setInputValue3(15);
+            setInputValue4(20);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='12')
+          {
+            setValue1( 21);
+            setValue2( 21);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+            //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+
+      }
+      else if(selectedValue2=='2')
+      {
+        if(SO=='1')
+          {
+            setValue1(0);
+            setValue2(0);
+            setInputValue1(0);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(0);
+          //SetWord(@TreatTime2@, 0, 00);
+             setSelectedValue1('-MONO');
+            
+          }
+          else if(SO=='2')
+          {
+            setValue1(11);
+            setValue2(11);
+            setInputValue1(35);
+            setInputValue2(4);
+            setInputValue3(8);
+            setInputValue4(15);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+              
+          }
+          else if(SO=='3')
+          {
+            setValue1(12);
+            setValue2(12);
+            setInputValue1(25);
+            setInputValue2(5);
+            setInputValue3(8);
+            setInputValue4(15);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='4')
+          {
+            setValue1(13);
+            setValue2(13);
+            setInputValue1(20);
+            setInputValue2(8);
+            setInputValue3(15);
+            setInputValue4(15);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='5')
+          {
+            setValue1(14);
+            setValue2(14);
+            setInputValue1(35);
+            setInputValue2(9);
+            setInputValue3(12);
+            setInputValue4(15);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='6')
+          {
+            setValue1(15);
+            setValue2(15);
+            setInputValue1(30);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(15);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='7')
+          {
+            setValue1(16);
+            setValue2(16);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='8')
+          {
+            setValue1(17);
+            setValue2(17);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='9')
+          {
+            setValue1(18);
+            setValue2(18);
+            setInputValue1(30);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='10')
+          {
+            setValue1(19);
+            setValue2(19);
+            setInputValue1(25);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='11')
+          {
+            setValue1(20);
+            setValue2(20);
+            setInputValue1(35);
+            setInputValue2(10);
+            setInputValue3(15);
+            setInputValue4(20);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+          else if(SO=='12')
+          {
+            setValue1(21);
+            setValue2(21);
+            setInputValue1(35);
+            setInputValue2(0);
+            setInputValue3(0);
+            setInputValue4(5);
+          //SetWord(@TreatTime2@, 0, 00);
+            setSelectedValue1('BI-PHASE');
+          }
+      }
+      else{
+        setValue1(0);
+        setValue2(0);
+        setInputValue1(0);
+        setInputValue2(0);
+        setInputValue3(0);
+        setInputValue4(0);
+      //SetWord(@TreatTime2@, 0, 00);
+        setSelectedValue1('');
+      }
+
+    }
+    else{
+      setValue1(0);
+      setValue2(0);
+      setInputValue1(0);
+      setInputValue2(0);
+      setInputValue3(0);
+      setInputValue4(0);
+    //SetWord(@TreatTime2@, 0, 00);
+      setSelectedValue1('');
+    }
+
+
     } catch (error) {
       console.error('Error fetching selected program:', error);
     }
@@ -56,7 +359,9 @@ export default function SettingScreen() {
     },1000)
 
     return ()=>clearInterval(interval);
-  }, []);
+  }, [selected,selectedValue2,params.id]);
+
+  
 
 
   
@@ -69,7 +374,7 @@ export default function SettingScreen() {
         <View style={styles.row}>
                 <MenuLayout
                 label=''
-                values={['MANUAL', 'PRE-PROGRAMME']}
+                values={['MANUAL', 'PRE-PROGRAM']}
                 selectedValue={selected}
                 setSelectedValue={setSelected}>
                 
@@ -118,8 +423,8 @@ export default function SettingScreen() {
     <TextInput
        
         keyboardType="numeric"
-        value={inputValue1}
-        onChangeText={text => setInputValue1(text)} // Update the state as user types
+        value={inputValue1 !== null ? inputValue1.toString() : ''}
+       onChangeText={(text) => setInputValue1(text !== '' ? Number(text) : null)} // Update the state as user types
         placeholder="Type here..."
       />
    <Text >You entered: {inputValue1} Hz</Text>
@@ -154,8 +459,8 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue2}
-       onChangeText={text => setInputValue2(text)} // Update the state as user types
+       value={inputValue2!== null ? inputValue2.toString() : ''}
+       onChangeText={(text) => setInputValue2(text !== '' ? Number(text) : null)} // Update the state as user types
        placeholder="Type here..."
      />
       <Text >You entered: {inputValue2} Sec</Text>
@@ -166,8 +471,8 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue3}
-       onChangeText={text => setInputValue3(text)} // Update the state as user types
+       value={inputValue3 !== null ? inputValue3.toString() : ''}
+       onChangeText={(text) => setInputValue3(text !== '' ? Number(text) : null)} // Update the state as user types
        placeholder="Type here..."
      />
       <Text >You entered: {inputValue3} Sec</Text>
@@ -204,8 +509,8 @@ export default function SettingScreen() {
      <TextInput
        
        keyboardType="numeric"
-       value={inputValue4}
-       onChangeText={text => setInputValue4(text)} // Update the state as user types
+       value={inputValue4 !== null ? inputValue4.toString() : ''}
+       onChangeText={(text) => setInputValue4(text !== '' ? Number(text) : null)} // Update the state as user types
        placeholder="Type here..."
      />
       <Text >You entered: {inputValue4} Sec</Text>
@@ -548,7 +853,9 @@ const styles1 = StyleSheet.create({
     justifyContent:'center',
     textAlign:'center',
     borderRadius: 10,
-    alignItems:'center'
+    alignItems:'center',
+    marginRight:10
+
   },
   box: {
     maxWidth:160,
@@ -628,7 +935,7 @@ const styles2 = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:3,
-    paddingLeft:10,
+    paddingLeft:40,
     backgroundColor: 'white',
     justifyContent:'center',
     textAlign:'center',

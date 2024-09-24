@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
     <PreviewLayout
     label=''
-    values={['MANUAL', 'PRE-PROGRAMME']}
+    values={['MANUAL', 'PRE-PROGRAM']}
     selectedValue={flexDirection}
     setSelectedValue={setflexDirection}>
     
