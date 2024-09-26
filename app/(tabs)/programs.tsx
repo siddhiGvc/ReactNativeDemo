@@ -1,15 +1,8 @@
-// import { Image, StyleSheet, Platform } from 'react-native';
-// import {View} from 'react-native';
+
 import React, {useState,useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import type {PropsWithChildren} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { Link } from 'expo-router';
 
 import { useRouter ,Href} from 'expo-router';
 
@@ -122,9 +115,7 @@ const PreviewLayout: React.FC<PreviewLayoutProps> = ({
         ))}
       </View>
 
-      {/* <View style={styles.contentContainer}>
-        {children}
-      </View> */}
+    
     </View>
   );
 };
@@ -165,9 +156,6 @@ const MenuLayout: React.FC<MenuLayoutProps> = ({
         ))}
       </View>
 
-      {/* <View style={styles.contentContainer}>
-        {children}
-      </View> */}
     </View>
   );
 };

@@ -10,8 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter ,Href} from 'expo-router';
 
-const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
+
 
   
 
@@ -32,24 +31,11 @@ const CustomHeader = () => {
   </>
 }
 
-const MenuHeader = (key:any,value:any) => (
- 
-  <View style={{ height: 50, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }} >
-     <PreviewLayout
-    label=''
-    values={['MANUAL', 'PRE-PROGRAM']}
-    selectedValue={value}
-    setSelectedValue={key}
-    >
-    
-  </PreviewLayout>
-  </View>
-  
-);
+
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const [flexDirection, setflexDirection] = useState('column');
+ 
 
   return (
     <Tabs
@@ -59,6 +45,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         header: () =>route.name==='index' ? <CustomHeader />:'',
         headerShown: true,
+        // tabBarStyle: route.name === ''  ? { } : {display: 'none'},
         // tabBarStyle: route.name === 'setting' ? { display: 'none' } : {},
       })}
       >

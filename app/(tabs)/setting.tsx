@@ -1,22 +1,22 @@
 // import { Image, StyleSheet, Platform } from 'react-native';
 // import {View} from 'react-native';
 import React, {useState,useEffect} from 'react';
-import {StyleSheet, Text,TextInput, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text,TextInput, TouchableOpacity, View,Dimensions} from 'react-native';
 import type {PropsWithChildren} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { Link } from 'expo-router';
 import Slider from '@react-native-community/slider';
 
 import { useRouter, useLocalSearchParams } from 'expo-router';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+
 
 export default function SettingScreen() {
-  const [flexDirection, setflexDirection] = useState('column');
+ 
   
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
@@ -759,15 +759,15 @@ const styles = StyleSheet.create({
   },
   slider:{
     flex:1,
-    width: 330,
+    width: windowWidth/2,
     height: 40,
     justifyContent:'center',
     alignContent:'center'
   },
   box: {
-    maxWidth:360,
-    width: 350,
-    height: 87,
+ 
+    width: windowWidth /2 ,
+    height:windowHeight / 4.2,
     flex:1,
     padding:1,
     borderWidth: 2, // Thickness of the border
