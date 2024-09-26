@@ -13,8 +13,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-
-
+var interval :any;
 export default function SettingScreen() {
  
   
@@ -43,6 +42,7 @@ export default function SettingScreen() {
       }
       
       var SO=params.id;
+    
     if(storedMenu == "PRE-PROGRAM")
     {
       if(selectedValue2=='1')
@@ -341,6 +341,7 @@ export default function SettingScreen() {
       setInputValue4(0);
     //SetWord(@TreatTime2@, 0, 00);
       setSelectedValue1('');
+      clearInterval(interval);
     }
 
 
@@ -354,7 +355,7 @@ export default function SettingScreen() {
    
    
     fetchSelectedMenu();
-    const interval=setInterval(()=>{
+    interval=setInterval(()=>{
     fetchSelectedMenu();
     },1000)
 
