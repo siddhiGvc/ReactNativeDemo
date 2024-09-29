@@ -761,13 +761,13 @@ const styles = StyleSheet.create({
   slider:{
     flex:1,
     width: windowWidth/2,
-    height: 40,
+    height: windowHeight/4,
     justifyContent:'center',
     alignContent:'center'
   },
   box: {
  
-    width: windowWidth /2 ,
+    width: windowWidth /5 ,
     height:windowHeight / 4.2,
     flex:1,
     padding:1,
@@ -858,9 +858,9 @@ const styles1 = StyleSheet.create({
 
   },
   box: {
-    maxWidth:160,
+    maxWidth:windowWidth/2,
     paddingVertical:-10,
-    height: 50,
+    height: windowHeight/6.7,
     flex:1,
   
     borderRadius: 10,
@@ -943,9 +943,9 @@ const styles2 = StyleSheet.create({
     alignItems:'center'
   },
   box: {
-    maxWidth:160,
+    maxWidth:windowWidth/4,
     paddingVertical:-10,
-    height: 50,
+    height: windowHeight/4,
     flex:1,
    
   
@@ -1045,16 +1045,15 @@ const styles2 = StyleSheet.create({
 
 const styles3 = StyleSheet.create({
   container: {
-    width:250,
-   
+    width:windowWidth/3.5,
     backgroundColor: 'white',
     justifyContent:'flex-start',
     textAlign:'center',
     alignItems:'center'
   },
   box: {
-    width: 50,
-    height: 10,
+    width: windowWidth/4,
+    height: windowHeight/4,
     
   },
   row: {

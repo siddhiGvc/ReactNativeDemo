@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View,Dimensions} from 'react-native';
 import type {PropsWithChildren} from 'react';
-
+import Constants from 'expo-constants';
 import { useRouter ,Href} from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -132,3 +132,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
+
+
