@@ -830,6 +830,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'center',
+        backgroundColor:'white',
+      
       
       },
       reactLogo: {
@@ -841,6 +843,7 @@ const styles = StyleSheet.create({
       },
       heading:{
         fontSize: 15,
+          color:'black'
       }
 });
 
@@ -915,7 +918,7 @@ const styles1 = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'flex-start',
-       
+        backgroundColor:'white',
       },
       reactLogo: {
         height: 178,
@@ -926,7 +929,7 @@ const styles1 = StyleSheet.create({
       },
       heading:{
         fontSize: 18,
-        color:'#000080'
+        color:'#00008'
       }
 });
 
